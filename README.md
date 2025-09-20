@@ -6,12 +6,12 @@ handling both IPv4 protocols and ARP ones, as well as treating a couple of usual
 errors, using ICMP protocols for timeout and unreachable host.
 
 Core components:
-I. Routing table: contains elements loaded from the given file
-II. ARP table: stores the IP-MAC maps user for packet forwarding
-III. Packet queue: stores the delayed packets and ensures their ARP handling 
+1. Routing table: contains elements loaded from the given file
+2. ARP table: stores the IP-MAC maps user for packet forwarding
+3. Packet queue: stores the delayed packets and ensures their ARP handling 
 
 Steps taken for each packet type
-I. IPv4 packets
+1. IPv4 packets
     - verification preocess: ensures the invalid packets are dropped
     - checksum check: checks if the checksum is valid
     - ICMP handling: depending on the error, generates a different message:
@@ -23,10 +23,9 @@ I. IPv4 packets
     - package sending: updates ethernet header with the source and destination MAC addresses;
                        sends the packet afterwards 
 
-II. ARP packets
+2. ARP packets
     - verification process: checks what type of ARP opreation should be done: request of reply
     - correct building of the packet: ensures packets are built correctly based on type
     - queueing unresolved entries: when packets have an invalid MAC address for the next hop, 
                                    it gets sent to the packets queue by updating its information
 
-* due to time mismanagement, i didnt manage to make the trie functions :[
